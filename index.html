@@ -3,22 +3,25 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>UP Nutrition FZC | Empowering Health & Wellness</title>
+    <title>UP Nutrition FZC | Wholesale, Distribution & Trade</title>
     <style>
         :root {
-            --primary-color: #2e7d32;
-            --primary-hover: #1b5e20;
-            --secondary-color: #f4f9f4;
-            --text-color: #333333;
-            --light-text: #666666;
+            --primary-color: #1e5631;
+            --primary-hover: #143d22;
+            --accent-color: #4c9a2a;
+            --secondary-bg: #f4f7f4;
+            --card-bg: #ffffff;
+            --text-color: #2b2b2b;
+            --light-text: #555555;
             --white: #ffffff;
+            --border-color: #e2e8e2;
         }
 
         * {
             box-sizing: border-box;
             margin: 0;
             padding: 0;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            font-family: 'Segoe UI', -apple-system, BlinkMacSystemFont, Roboto, sans-serif;
         }
 
         body {
@@ -32,7 +35,7 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
-            padding: 1.5rem 10%;
+            padding: 1.2rem 8%;
             background-color: var(--white);
             box-shadow: 0 2px 10px rgba(0,0,0,0.05);
             position: sticky;
@@ -41,94 +44,286 @@
         }
 
         .logo {
-            font-size: 1.5rem;
+            font-size: 1.4rem;
             font-weight: 700;
             color: var(--primary-color);
             text-decoration: none;
+            letter-spacing: -0.5px;
         }
 
         .nav-links {
             display: flex;
             list-style: none;
-            gap: 2rem;
+            gap: 1.8rem;
         }
 
         .nav-links a {
             text-decoration: none;
             color: var(--text-color);
             font-weight: 500;
-            transition: color 0.3s;
+            font-size: 0.95rem;
+            transition: color 0.2s;
         }
 
         .nav-links a:hover {
-            color: var(--primary-color);
+            color: var(--accent-color);
         }
 
-        /* Hero Section */
-        .hero {
-            background: linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)), url('https://images.unsplash.com/photo-1498837167922-ddd27525d352?auto=format&fit=crop&w=1350&q=80') center/cover no-repeat;
-            height: 70vh;
+        /* Slider / Hero Section */
+        .slider-container {
+            position: relative;
+            width: 100%;
+            height: 75vh;
+            min-height: 500px;
+            overflow: hidden;
+        }
+
+        .slide {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            opacity: 0;
+            transition: opacity 1s ease-in-out;
+            background-size: cover;
+            background-position: center;
             display: flex;
             flex-direction: column;
             justify-content: center;
             align-items: center;
             text-align: center;
             color: var(--white);
-            padding: 0 1rem;
+            padding: 4rem 1rem;
         }
 
-        .hero h1 {
-            font-size: 3rem;
+        .slide.active {
+            opacity: 1;
+        }
+
+        /* Dark overlay for contrast */
+        .slide::before {
+            content: "";
+            position: absolute;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background: linear-gradient(rgba(10, 25, 15, 0.75), rgba(10, 25, 15, 0.75));
+            z-index: 1;
+        }
+
+        /* Background images */
+        .slide-1 {
+            background-image: url('https://images.unsplash.com/photo-1579722821273-0f6c7d44362f?auto=format&fit=crop&w=1600&q=80');
+        }
+
+        .slide-2 {
+            background-image: url('https://images.unsplash.com/photo-1593095948071-474c5cc2989d?auto=format&fit=crop&w=1600&q=80');
+        }
+
+        /* 3rd Photo: Man drinking a protein shake after workout */
+        .slide-3 {
+            background-image: url('https://images.unsplash.com/photo-1583454110551-21f2fa2afe61?auto=format&fit=crop&w=1600&q=80');
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 2;
+            max-width: 900px;
+        }
+
+        .hero-content h1 {
+            font-size: 2.8rem;
             margin-bottom: 1rem;
+            line-height: 1.2;
         }
 
-        .hero p {
-            font-size: 1.25rem;
-            max-width: 600px;
-            margin-bottom: 2rem;
+        .hero-content p {
+            font-size: 1.2rem;
+            max-width: 750px;
+            margin: 0 auto 2rem auto;
+            color: #e0e0e0;
+        }
+
+        .hero-btns {
+            display: flex;
+            gap: 1rem;
+            flex-wrap: wrap;
+            justify-content: center;
         }
 
         .btn {
             display: inline-block;
-            background-color: var(--primary-color);
+            background-color: var(--accent-color);
             color: var(--white);
-            padding: 0.8rem 2rem;
-            border-radius: 5px;
+            padding: 0.85rem 2rem;
+            border-radius: 4px;
             text-decoration: none;
             font-weight: 600;
-            transition: background-color 0.3s;
+            transition: background-color 0.2s ease;
         }
 
         .btn:hover {
-            background-color: var(--primary-hover);
+            background-color: var(--primary-color);
         }
 
-        /* About Section */
+        .btn-outline {
+            background-color: transparent;
+            border: 2px solid var(--white);
+        }
+
+        .btn-outline:hover {
+            background-color: var(--white);
+            color: var(--primary-color);
+        }
+
+        /* Slider Controls */
+        .slider-arrow {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            background: rgba(0, 0, 0, 0.4);
+            color: white;
+            border: none;
+            font-size: 2rem;
+            padding: 0.5rem 1rem;
+            cursor: pointer;
+            z-index: 10;
+            border-radius: 4px;
+            transition: background 0.3s;
+        }
+
+        .slider-arrow:hover {
+            background: var(--accent-color);
+        }
+
+        .prev { left: 20px; }
+        .next { right: 20px; }
+
+        .slider-dots {
+            position: absolute;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            gap: 10px;
+            z-index: 10;
+        }
+
+        .dot {
+            width: 12px;
+            height: 12px;
+            background: rgba(255, 255, 255, 0.5);
+            border-radius: 50%;
+            cursor: pointer;
+            transition: background 0.3s, transform 0.3s;
+        }
+
+        .dot.active {
+            background: var(--accent-color);
+            transform: scale(1.2);
+        }
+
+        /* Layout Structure */
         .section {
-            padding: 5rem 10%;
+            padding: 5rem 8%;
         }
 
+        .section-alt {
+            background-color: var(--secondary-bg);
+        }
+
+        .section-header {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+
+        .section-header h2 {
+            font-size: 2.2rem;
+            color: var(--primary-color);
+            margin-bottom: 0.5rem;
+        }
+
+        .section-header p {
+            color: var(--light-text);
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        /* Cards & Grid */
         .grid-2 {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
             gap: 2rem;
         }
 
+        .grid-3 {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .grid-4 {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+            gap: 1.5rem;
+        }
+
         .card {
-            background-color: var(--secondary-color);
-            padding: 2.5rem;
-            border-radius: 8px;
-            border-left: 5px solid var(--primary-color);
+            background-color: var(--card-bg);
+            padding: 2rem;
+            border-radius: 6px;
+            border: 1px solid var(--border-color);
+            box-shadow: 0 4px 6px rgba(0,0,0,0.02);
         }
 
-        .card h2 {
+        .card-highlight {
+            border-top: 4px solid var(--primary-color);
+        }
+
+        .card h3 {
             color: var(--primary-color);
-            margin-bottom: 1rem;
+            margin-bottom: 0.8rem;
+            font-size: 1.25rem;
         }
 
-        /* Contact Section */
-        .contact {
-            background-color: #f9f9f9;
+        /* Lists Styling */
+        .check-list {
+            list-style: none;
+        }
+
+        .check-list li {
+            position: relative;
+            padding-left: 1.8rem;
+            margin-bottom: 0.8rem;
+        }
+
+        .check-list li::before {
+            content: "✓";
+            position: absolute;
+            left: 0;
+            color: var(--accent-color);
+            font-weight: bold;
+        }
+
+        /* Values Grid */
+        .value-card {
+            text-align: center;
+            padding: 1.5rem;
+            background: var(--white);
+            border-radius: 6px;
+            border: 1px solid var(--border-color);
+        }
+
+        .value-card h4 {
+            color: var(--primary-color);
+            margin-bottom: 0.4rem;
+            font-size: 1.1rem;
+        }
+
+        /* Contact Form Layout */
+        .contact-container {
+            display: grid;
+            grid-template-columns: 1fr 1.2fr;
+            gap: 3rem;
         }
 
         .contact-info {
@@ -137,9 +332,9 @@
             gap: 1.5rem;
         }
 
-        .contact-item h3 {
-            margin-bottom: 0.5rem;
+        .contact-info-block h4 {
             color: var(--primary-color);
+            margin-bottom: 0.3rem;
         }
 
         .contact-form {
@@ -151,10 +346,10 @@
         .contact-form input, 
         .contact-form textarea {
             width: 100%;
-            padding: 0.8rem;
+            padding: 0.8rem 1rem;
             border: 1px solid #ccc;
             border-radius: 4px;
-            font-size: 1rem;
+            font-size: 0.95rem;
         }
 
         .contact-form textarea {
@@ -162,91 +357,355 @@
             height: 120px;
         }
 
-        /* Footer */
-        footer {
-            background-color: #1a1a1a;
+        /* Banner CTA */
+        .cta-banner {
+            background-color: var(--primary-color);
             color: var(--white);
             text-align: center;
-            padding: 2rem 0;
-            font-size: 0.9rem;
+            padding: 4rem 8%;
         }
 
-        /* Responsive Design */
+        .cta-banner h2 {
+            font-size: 2rem;
+            margin-bottom: 1rem;
+        }
+
+        .cta-banner p {
+            margin-bottom: 2rem;
+            font-size: 1.1rem;
+            color: #d0e8d0;
+        }
+
+        /* Footer */
+        footer {
+            background-color: #121212;
+            color: #a0a0a0;
+            text-align: center;
+            padding: 2rem 8%;
+            font-size: 0.85rem;
+            border-top: 1px solid #222;
+        }
+
+        /* Responsive Settings */
+        @media (max-width: 900px) {
+            .contact-container {
+                grid-template-columns: 1fr;
+            }
+        }
+
         @media (max-width: 768px) {
-            .hero h1 {
-                font-size: 2.2rem;
+            .hero-content h1 {
+                font-size: 2rem;
             }
             .nav-links {
                 display: none;
+            }
+            .section {
+                padding: 3rem 5%;
+            }
+            .slider-arrow {
+                padding: 0.3rem 0.6rem;
+                font-size: 1.5rem;
             }
         }
     </style>
 </head>
 <body>
 
+    <!-- Navigation -->
     <nav>
-        <a href="https://upnutritionfzc.com/" class="logo">UP Nutrition FZC</a>
+        <a href="https://upnutritionfzc.com/" class="logo">UP NUTRITION FZC</a>
         <ul class="nav-links">
             <li><a href="#about">About Us</a></li>
-            <li><a href="#mission-vision">Mission & Vision</a></li>
+            <li><a href="#scope">Business Scope</a></li>
+            <li><a href="#products">Products</a></li>
+            <li><a href="#why-us">Why Choose Us</a></li>
             <li><a href="#contact">Contact</a></li>
         </ul>
     </nav>
 
-    <header class="hero">
-        <h1>Welcome to UP Nutrition FZC</h1>
-        <p>Elevating health and vitality through innovative nutritional solutions and premium quality standards.</p>
-        <a href="#contact" class="btn">Get in Touch</a>
+    <!-- Slider Hero Section -->
+    <header class="slider-container">
+        <!-- Slide 1 -->
+        <div class="slide slide-1 active">
+            <div class="hero-content">
+                <h1>Quality Products. Reliable Supply. Strong Partnerships.</h1>
+                <p>A UAE-based trading and distribution company specializing in FMCG, food and beverages, health and wellness, and protein supplements.</p>
+                <div class="hero-btns">
+                    <a href="#products" class="btn">Explore Our Products</a>
+                    <a href="#contact" class="btn btn-outline">Become a Partner</a>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 2 -->
+        <div class="slide slide-2">
+            <div class="hero-content">
+                <h1>Premium Sports & Protein Nutrition</h1>
+                <p>Sourcing high-grade protein powders, workout supplements, and active performance essentials for global distribution.</p>
+                <div class="hero-btns">
+                    <a href="#products" class="btn">View Categories</a>
+                    <a href="#contact" class="btn btn-outline">Request Catalog</a>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 3 (Updated Image: Man using sports nutrition) -->
+        <div class="slide slide-3">
+            <div class="hero-content">
+                <h1>Connecting Quality Brands with Growing Markets</h1>
+                <p>Your trusted regional partner for import, export, and wholesale distribution across the UAE and international trade channels.</p>
+                <div class="hero-btns">
+                    <a href="#about" class="btn">Learn More</a>
+                    <a href="#contact" class="btn btn-outline">Contact Us</a>
+                </div>
+            </div>
+        </div>
+
+        <!-- Controls -->
+        <button class="slider-arrow prev" onclick="changeSlide(-1)">&#10094;</button>
+        <button class="slider-arrow next" onclick="changeSlide(1)">&#10095;</button>
+
+        <div class="slider-dots">
+            <span class="dot active" onclick="goToSlide(0)"></span>
+            <span class="dot" onclick="goToSlide(1)"></span>
+            <span class="dot" onclick="goToSlide(2)"></span>
+        </div>
     </header>
 
-    <section id="mission-vision" class="section">
+    <!-- About Section -->
+    <section id="about" class="section">
+        <div class="section-header">
+            <h2>About Us</h2>
+            <p>Connecting trusted brands with growing markets across the UAE and worldwide.</p>
+        </div>
+        <div style="max-width: 800px; margin: 0 auto; text-align: center; font-size: 1.05rem; margin-bottom: 3rem;">
+            <p>Established in the United Arab Emirates, UP Nutrition FZC is a dynamic trading company focused on the wholesale, distribution, import, and export of trusted consumer products. We work with established suppliers and recognized brands to connect quality products with businesses across local and international markets. Our understanding of market demand allows us to identify high-potential products and provide practical supply solutions for our partners.</p>
+        </div>
+
         <div class="grid-2">
-            <div class="card">
-                <h2>Our Mission</h2>
-                <p>To provide high-quality, scientifically backed nutritional products and services that empower individuals and organizations to achieve optimal health, performance, and long-term well-being.</p>
+            <div class="card card-highlight">
+                <h3>Our Mission</h3>
+                <p>To supply quality FMCG, food, health, and beauty products through dependable sourcing, competitive pricing, and efficient distribution. We aim to support our customers’ growth by providing the right products, responsive service, and reliable wholesale and export solutions.</p>
             </div>
-            <div class="card">
-                <h2>Our Vision</h2>
-                <p>To become a trusted global leader in the nutrition and wellness sector, recognized for our innovation, integrity, and commitment to enhancing quality of life for communities worldwide.</p>
+            <div class="card card-highlight">
+                <h3>Our Vision</h3>
+                <p>To become a trusted regional trading and distribution partner, connecting reputable brands and quality consumer products with growing markets across the UAE and internationally. We aspire to be recognized for our reliability, market knowledge, and operational excellence.</p>
             </div>
         </div>
     </section>
 
-    <section id="contact" class="section contact">
-        <h2 style="text-align: center; margin-bottom: 3rem; color: var(--primary-color);">Contact Us</h2>
+    <!-- Business Scope Section -->
+    <section id="scope" class="section section-alt">
+        <div class="section-header">
+            <h2>Our Business Scope</h2>
+            <p>Comprehensive supply solutions tailored to international trade and wholesale needs.</p>
+        </div>
+        <div class="grid-4">
+            <div class="card">
+                <h3>Wholesale Trading</h3>
+                <p>We provide a diverse selection of consumer products to retailers, supermarkets, pharmacies, resellers, distributors, and other wholesale businesses.</p>
+            </div>
+            <div class="card">
+                <h3>Import and Export</h3>
+                <p>We source products from established suppliers and facilitate their movement between the UAE and international markets with full supply chain efficiency.</p>
+            </div>
+            <div class="card">
+                <h3>Distribution</h3>
+                <p>We help brands and suppliers reach suitable sales channels through our extensive wholesale network, local market knowledge, and logistics capabilities.</p>
+            </div>
+            <div class="card">
+                <h3>Product Sourcing</h3>
+                <p>We assist business customers in sourcing suitable products based on category, market demand, target price, required quantity, and destination.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Product Categories -->
+    <section id="products" class="section">
+        <div class="section-header">
+            <h2>Our Product Categories</h2>
+            <p>High-demand consumer lines tailored to diverse distribution channels.</p>
+        </div>
+        <div class="grid-4">
+            <div class="card card-highlight">
+                <h3>FMCG</h3>
+                <p>A broad range of fast-moving consumer goods and everyday essentials suitable for retail, wholesale, and distribution channels.</p>
+            </div>
+            <div class="card card-highlight">
+                <h3>Food & Beverages</h3>
+                <p>Packaged food, grocery products, snacks, cereals, beverages, cooking essentials, and other consumer food categories.</p>
+            </div>
+            <div class="card card-highlight">
+                <h3>Health & Wellness</h3>
+                <p>Nutritional products, protein supplements, sports nutrition, functional foods, and wellness-focused consumer products.</p>
+            </div>
+            <div class="card card-highlight">
+                <h3>Beauty & Personal Care</h3>
+                <p>Skincare, haircare, hygiene, cosmetics, and personal-care products from recognized and emerging brands.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Who We Serve & Why Choose Us -->
+    <section id="why-us" class="section section-alt">
         <div class="grid-2">
-            
+            <div>
+                <h2 style="color: var(--primary-color); margin-bottom: 1.5rem;">Who We Serve</h2>
+                <ul class="check-list">
+                    <li>Supermarkets and grocery stores</li>
+                    <li>Pharmacies and health retailers</li>
+                    <li>Beauty and personal-care retailers</li>
+                    <li>Wholesalers and distributors</li>
+                    <li>Importers and exporters</li>
+                    <li>Corporate and institutional buyers</li>
+                    <li>International trading partners</li>
+                </ul>
+            </div>
+            <div>
+                <h2 style="color: var(--primary-color); margin-bottom: 1.5rem;">Why Choose UP Nutrition FZC?</h2>
+                <div style="display: flex; flex-direction: column; gap: 1rem;">
+                    <div>
+                        <strong>Diverse Product Portfolio:</strong> Access multiple high-demand categories through one partner.
+                    </div>
+                    <div>
+                        <strong>Competitive Wholesale Solutions:</strong> Commercially attractive pricing structured for volume.
+                    </div>
+                    <div>
+                        <strong>Reliable Sourcing:</strong> Focused on product authenticity, reliability, and market fit.
+                    </div>
+                    <div>
+                        <strong>Market Experience & Support:</strong> Deep domain knowledge combined with flexible order processing.
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Core Values Section -->
+    <section class="section">
+        <div class="section-header">
+            <h2>Our Core Values</h2>
+            <p>The principles that guide every deal and distribution channel.</p>
+        </div>
+        <div class="grid-3">
+            <div class="value-card">
+                <h4>Integrity</h4>
+                <p>We conduct business honestly, transparently, and responsibly.</p>
+            </div>
+            <div class="value-card">
+                <h4>Quality</h4>
+                <p>We aim to supply products that meet our customers’ expectations.</p>
+            </div>
+            <div class="value-card">
+                <h4>Reliability</h4>
+                <p>We prioritize dependable supply, clear communication, and timely service.</p>
+            </div>
+            <div class="value-card">
+                <h4>Customer Focus</h4>
+                <p>We provide solutions aligned with our clients' commercial objectives.</p>
+            </div>
+            <div class="value-card">
+                <h4>Growth</h4>
+                <p>We continuously explore new products, markets, and regional opportunities.</p>
+            </div>
+            <div class="value-card">
+                <h4>Partnership</h4>
+                <p>We believe long-term success relies on mutually beneficial relationships.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Call to Action Banner -->
+    <section class="cta-banner">
+        <h2>Partner With Us Today</h2>
+        <p>Whether you're looking for wholesale supply, distribution networks, or brand placement in the UAE, we are ready to assist.</p>
+        <a href="#contact" class="btn btn-outline">Get in Touch</a>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="section">
+        <div class="section-header">
+            <h2>Contact Us</h2>
+            <p>Let's build a successful partnership together.</p>
+        </div>
+        <div class="contact-container">
             <div class="contact-info">
-                <div class="contact-item">
-                    <h3>Company Headquarters</h3>
+                <div class="contact-info-block">
+                    <h4>Company Headquarters</h4>
                     <p>UP Nutrition FZC</p>
                     <p>Free Zone Company (FZC)</p>
                     <p>United Arab Emirates</p>
                 </div>
-                <div class="contact-item">
-                    <h3>Email Us</h3>
-                    <p><a href="mailto:info@upnutritionfzc.com" style="color: var(--text-color);">info@upnutritionfzc.com</a></p>
+                <div class="contact-info-block">
+                    <h4>Inquiries & Support</h4>
+                    <p>Email: <a href="mailto:info@upnutritionfzc.com" style="color: var(--text-color);">info@upnutritionfzc.com</a></p>
+                    <p>Website: <a href="https://upnutritionfzc.com/" style="color: var(--primary-color);">https://upnutritionfzc.com/</a></p>
                 </div>
-                <div class="contact-item">
-                    <h3>Website</h3>
-                    <p><a href="https://upnutritionfzc.com/" style="color: var(--primary-color); font-weight: 500;">https://upnutritionfzc.com/</a></p>
+                <div class="contact-info-block">
+                    <h4>Business Hours</h4>
+                    <p>Monday - Friday: 9:00 AM - 6:00 PM (GST)</p>
                 </div>
             </div>
 
             <form class="contact-form" action="#" method="post">
                 <input type="text" name="name" placeholder="Your Full Name" required>
                 <input type="email" name="email" placeholder="Your Email Address" required>
-                <input type="text" name="subject" placeholder="Subject" required>
-                <textarea name="message" placeholder="Your Message" required></textarea>
-                <button type="submit" class="btn" style="border: none; cursor: pointer;">Send Message</button>
+                <input type="text" name="company" placeholder="Company Name">
+                <input type="text" name="subject" placeholder="Subject (e.g., Wholesale Inquiry, Export)" required>
+                <textarea name="message" placeholder="Provide details regarding product interests, quantities, or market destination..." required></textarea>
+                <button type="submit" class="btn" style="border: none; cursor: pointer; text-align: center;">Send Message</button>
             </form>
-
         </div>
     </section>
 
+    <!-- Footer -->
     <footer>
         <p>&copy; 2026 UP Nutrition FZC. All rights reserved.</p>
+        <p style="margin-top: 0.5rem; color: #666;">Quality Products. Reliable Supply. Strong Partnerships.</p>
     </footer>
 
+    <!-- Image Slider JavaScript -->
+    <script>
+        let currentSlide = 0;
+        const slides = document.querySelectorAll('.slide');
+        const dots = document.querySelectorAll('.dot');
+        const totalSlides = slides.length;
+        let autoSlideInterval;
+
+        function showSlide(index) {
+            slides.forEach((slide, i) => {
+                slide.classList.remove('active');
+                dots[i].classList.remove('active');
+            });
+
+            currentSlide = (index + totalSlides) % totalSlides;
+            slides[currentSlide].classList.add('active');
+            dots[currentSlide].classList.add('active');
+        }
+
+        function changeSlide(direction) {
+            showSlide(currentSlide + direction);
+            resetAutoSlide();
+        }
+
+        function goToSlide(index) {
+            showSlide(index);
+            resetAutoSlide();
+        }
+
+        function startAutoSlide() {
+            autoSlideInterval = setInterval(() => {
+                showSlide(currentSlide + 1);
+            }, 5000);
+        }
+
+        function resetAutoSlide() {
+            clearInterval(autoSlideInterval);
+            startAutoSlide();
+        }
+
+        startAutoSlide();
+    </script>
 </body>
 </html>
